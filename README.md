@@ -9,7 +9,7 @@ An animated anthropomorphic being, created entirely from inanimate matter.
 Installing golem
 ----------------
 
-  git clone git://github.com/joaosoda/golem.git
+	git clone git://github.com/joaosoda/golem.git
 	go build -o golem golem/main.go
 
 Usage
