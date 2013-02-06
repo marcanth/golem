@@ -7,6 +7,7 @@ import (
 	"os"
 	"path"
 	"strings"
+	"log"
 )
 
 func Copy(src, dst string) {
@@ -15,20 +16,20 @@ func Copy(src, dst string) {
 	for _, path := range paths {
 		if stat, err := os.Stat(path); stat.IsDir() {
 			if err != nil {
-				panic(err)
+				log.Fatal(err)
 			}
 			os.Mkdir(changePathName(src, dst, path), stat.Mode().Perm())
 		} else {
 			i, err := os.Open(path)
 			if err != nil {
-				panic(err)
+				log.Fatal(err)
 			}
 			defer i.Close()
 			r := bufio.NewReader(i)
 
 			o, err := os.Create(changePathName(src, dst, path))
 			if err != nil {
-				panic(err)
+				log.Fatal(err)
 			}
 			defer o.Close()
 			w := bufio.NewWriter(o)
@@ -36,7 +37,7 @@ func Copy(src, dst string) {
 			for {
 				n, err := r.Read(buf)
 				if err != nil && err != io.EOF {
-					panic(err)
+					log.Fatal(err)
 				}
 				if n == 0 {
 					break

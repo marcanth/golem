@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"path"
+	"log"
 )
 
 func Zip(src, dst string) {
@@ -14,7 +15,7 @@ func Zip(src, dst string) {
 
 		fout, err := os.Create(path.Clean(dst))
 		if err != nil {
-			panic(err)
+			log.Fatal(err)
 		}
 		defer fout.Close()
 
@@ -24,20 +25,20 @@ func Zip(src, dst string) {
 		for _, file := range paths {
 			fin, err := os.Open(file)
 			if err != nil {
-				panic(err)
+				log.Fatal(err)
 			}
 			defer fin.Close()
 
 			if s, _ := fin.Stat(); s.IsDir() == false {
 				f, err := w.Create(fin.Name())
 				if err != nil && err != io.EOF {
-					panic(err)
+					log.Fatal(err)
 				}
 				_buf := make([]byte, 1024)
 				for {
 					n, err := fin.Read(_buf)
 					if err != nil && err != io.EOF {
-						panic(err)
+						log.Fatal(err)
 					}
 					if n == 0 {
 						break
