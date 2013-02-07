@@ -10,7 +10,8 @@ Installing golem
 ----------------
 
 	git clone git://github.com/joaosoda/golem.git
-	go build -o golem golem/main.go
+	cd golem
+	go build
 
 Usage
 -----
