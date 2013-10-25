@@ -42,3 +42,4 @@ Exemple
 	{
 	    "Destination": "path/to/a/folder"
 	}
+Uma linha a mais
